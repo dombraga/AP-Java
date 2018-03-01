@@ -1,0 +1,60 @@
+
+/**
+ * Created by Cjb on 01/03/2018.
+ */
+public class Estatisticas {
+    /* Váriáveis de Objectos */
+    double x[], media, variancia, desvio_padrao;
+    int NumerosElementos;
+
+    /* Método Constructor */
+    Estatisticas(String v[]){ /* Recebe um Array de Strings */
+        int k;
+        NumerosElementos = v.length;
+        x = new double[NumerosElementos];
+        for (k = 0; k < NumerosElementos; k++)
+            x[k] = Double.valueOf(v[k]).doubleValue();
+        media = achar_media();
+        variancia = achar_variancia();
+        desvio_padrao = achar_desviop();
+    }
+
+    /* Método para Obter a Média */
+    double achar_media(){
+        int k;
+        double total = 0;
+        for (k = 0; k < this.NumerosElementos; k++)
+            total += this.x[k];
+        return (total / this.NumerosElementos);
+    }
+
+    /* Método para Achar a Variancia */
+    double achar_variancia(){
+        int k;
+        double total = 0;
+        for (k = 0; k < this.NumerosElementos; k++)
+            total += Math.pow(this.x[k]- this.media,2);
+        return (total / this.NumerosElementos);
+    }
+
+    /* Método para Obter o Desvio Padrão*/
+    double achar_desviop(){
+        return (Math.sqrt(this.achar_variancia()));
+    }
+
+    /* Método Principal (Main)*/
+    public static void main(String[]args){
+        if (args.length < 2) { /* If the number of args to be under 2*/
+            System.out.println("To use this program you should which");
+            System.out.println("Pass the data values of which");
+            System.out.println("Get Stats (minimum two values)");
+            System.exit(1); /* To End the Program*/
+        }
+        Estatisticas dados = new Estatisticas(args);
+        System.out.println("You Introduced " + dados.NumerosElementos + "Elements");
+        System.out.println(" Statistic Data : ");
+        System.out.println("Average : " + dados.media);
+        System.out.println("Variance : " + dados.variancia);
+        System.out.println("Standard Deviation : " + dados.desvio_padrao);
+    }
+}
